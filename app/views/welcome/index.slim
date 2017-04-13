@@ -1,1 +1,10 @@
-h2 hi
+.container
+	h3 Enter your variable to search
+	= simple_form_for '', url: search_results_path, method: :get do |f|
+		= f.input :search_string
+		= f.button :submit, 'Get Revenue', id: 'submit-search'
+		= f.button :submit, 'Company Info', id: 'submit-search'
+		= link_to 'Clear', root_path, class: 'btn btn-danger'
+	end
+
+	h2 = "Revenue of #{@company_name} is #{@revenue}" if @revenue.present?
