@@ -13,11 +13,13 @@
 	  	= simple_form_for '', url: search_results_path, method: :get do |f|
 				= f.input :search_string
 				= f.button :submit, 'Get Revenue', class: 'submit-search'
+				= link_to 'Clear', root_path, class: 'btn btn-danger clear-btn'
 
 	  #ios.tab-pane role='tabpanel'
 	  	= simple_form_for '', url: search_results_path, method: :get do |f|
 				= f.input :search_string
 				= f.button :submit, 'Company Info', class: 'submit-search'
+				= link_to 'Clear', root_path, class: 'btn btn-danger clear-btn'
 
 	- if @revenue.present?
 		h2 = "#{@company_name} Revenue => "
