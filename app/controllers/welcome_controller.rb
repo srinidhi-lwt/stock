@@ -25,12 +25,14 @@ class WelcomeController < ApplicationController
 			form = page.form_with(:action => '/search')
 			search_results = form.submit
 			revenue = search_results.at('.g').children.text
+			flash[:success] = 'Success'
 			redirect_to root_path(company: company_name, revenue: revenue)
 		else
 			page = agent.get("http://www.google.com?q=technologies+used+by+#{company_name}")
 			form = page.form_with(:action => '/search')
 			search_results = form.submit
 			address = search_results.at('.g').children.text
+			flash[:success] = 'Success'
 			redirect_to root_path(company: company_name, address: address)
 		end
 	end
