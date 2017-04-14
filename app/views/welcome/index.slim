@@ -1,10 +1,28 @@
 .container
-	h3 Enter your variable to search
-	= simple_form_for '', url: search_results_path, method: :get do |f|
-		= f.input :search_string
-		= f.button :submit, 'Get Revenue', id: 'submit-search'
-		= f.button :submit, 'Company Info', id: 'submit-search'
-		= link_to 'Clear', root_path, class: 'btn btn-danger'
-	end
+	h2 Search here
+	ul.nav.nav-tabs.nav-tabs-justified.text-center role="tablist"
+	  li.active.javascript-tab role='presentation'
+	    a data-toggle='tab'role='tab' href='#javascript'
+	    	| Revenue
+	  li.ios-tab role='presentation'
+	    a data-toggle='tab'role='tab' href='#ios'
+	    	| Info
 
-	h2 = "Revenue of #{@company_name} is #{@revenue}" if @revenue.present?
+	.tab-content
+	  #javascript.tab-pane.active role='tabpanel'
+	  	= simple_form_for '', url: search_results_path, method: :get do |f|
+				= f.input :search_string
+				= f.button :submit, 'Get Revenue', class: 'submit-search'
+
+	  #ios.tab-pane role='tabpanel'
+	  	= simple_form_for '', url: search_results_path, method: :get do |f|
+				= f.input :search_string
+				= f.button :submit, 'Company Info', class: 'submit-search'
+
+	- if @revenue.present?
+		h2 = "#{@company_name} Revenue => "
+		h4 = "#{@revenue}"
+
+	- if @address.present?	
+		h2 = "#{@company_name} Info => "
+		h4 = "#{@address}" 
